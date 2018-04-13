@@ -1,0 +1,58 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* For Draw & Measurement Widget */
+
+.widget-panebody-inner{
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
+.widget-panelbody-inner-seperator {
+    margin-top: 10px;
+}
+
+.widget-panelbody-inner-measurementResultLabel {
+    border-top: 1px solid #a9a9a9;
+    padding: 10px 10px;
+    color: #a9a9a9;
+    text-align: center;
+}
+
+.action-button-gaps {
+    margin-right: 30px;
+}
+
+.widget-panelbody-inner-selector {
+    width: 230px;
+}
+
+.action-button {
+    font-size: 16px;
+    background-color: transparent;
+    border: 1px solid black ;
+    color: black;
+    height: 32px;
+    width: 32px;
+    text-align: center;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  }
+
+.action-button:hover,
+.action-button:focus {
+    background: #0079c1;
+    color: #e4e4e4;
+}
+
+.action-button-active {
+    background: #0079c1;
+    color: #e4e4e4;
+}
+
+/* /.For Draw Widget */

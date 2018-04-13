@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{FA39BF90-C0F1-4250-98A0-71F72082C10E}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GISWebViewer/js/application/view/ViewManager.js">
+    <Files>
+      <File FileName="GISWebViewer/index.html" Line="378" Column="10" />
+      <File FileName="GISWebViewer/js/application/view/ViewManager.js" Line="82" Column="21" />
+      <File FileName="GISWebViewer/js/configs/mapConfig.js" Line="18" Column="14" />
+      <File FileName="GISWebViewer/js/configs/appConfig.js" Line="14" Column="25" />
+      <File FileName="GISWebViewer/js/application/main.js" Line="37" Column="40" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.GISWebViewer PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>

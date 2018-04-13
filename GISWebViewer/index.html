@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <!-- Show logo of KOC at Tag of page -->
+  <link rel="icon" href="assets/images/koclogo.png">  
+  <title>Map Viewer with Nav Bar</title>
+
+  <!-- Calcite Bootstrap -->
+  <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-bootstrap.min-v0.2.css">
+
+  <!-- Calcite Maps -->
+  <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-arcgis-4.x.min-v0.2.css">
+
+  <!-- ArcGIS JS 4.6 -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css">
+
+  <!-- Bootstrap  -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://www.w3schools.com/https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <!-- Load any application specific styles -->
+  <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body class="calcite-maps calcite-nav-top">
+
+  <!-- Navbar -->
+
+  <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark calcite-bgcolor-dark-blue">
+    <!-- Menu -->
+    <div class="dropdown calcite-dropdown calcite-bg-light calcite-text-dark" role="presentation">
+      <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <div class="calcite-dropdown-toggle">
+          <span class="sr-only">Toggle dropdown menu</span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </a>
+      <ul class="dropdown-menu">
+        <!-- <li class="active"><a class="hidden-md hidden-lg" href="#2dTab" aria-controls="2Dtab" role="tab"
+            data-toggle="tab"> Map</a></li>
+        <li><a class="hidden-md hidden-lg" href="#3dTab" aria-controls="3Dtab" role="tab"
+            data-toggle="tab"> Scene</a></li> -->
+        <li><a role="button" data-target="#panelLayers" aria-haspopup="true"><span class="glyphicon glyphicon-th-list"></span> Layers </a></li>
+        <li><a role="button" data-target="#panelLegend" aria-haspopup="true"><span class="glyphicon glyphicon-list-alt"></span> Legends </a></li>
+        <li><a role="button" data-target="#panelSlides" aria-haspopup="true"><span class="glyphicon glyphicon-picture"></span> Bookmarks </a></li>
+        <li><a role="button" data-target="#panelPrint" aria-haspopup="true"><span class="glyphicon glyphicon-print"></span> Print </a></li>
+        <li><a role="button" data-target="#panelBasemapGallery" aria-haspopup="true"><span class="glyphicon esri-icon-basemap"></span> Basemap Gallery </a></li>
+        <li><a role="button" data-target="#panelMeasurement" aria-haspopup="true"><span class="glyphicon glyphicon-th-large"></span> Measurement </a></li>
+        <li><a role="button" data-target="#panelDraw" aria-haspopup="true"><span class="glyphicon esri-icon-polygon"></span> Draw</a></li>
+        <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span class="glyphicon glyphicon-fullscreen"></span> Full Map</a></li>
+      </ul>
+    </div>
+    <!-- Title -->
+    <div class="calcite-title calcite-overflow-hidden">
+      <!-- <img src="assets/images/koclogo.png" width="60" height="50" alt="" /> -->
+      <!-- <span class="calcite-title-main">KOC</span> -->
+      <span class="calcite-title-main" data-bind="text: kocAppMainName"></span>
+      <span class="calcite-title-divider hidden-xs"></span>
+      <span class="calcite-title-sub hidden-xs" data-bind="text: kocAppSubName"></span>
+      <!-- <span class="calcite-title-sub hidden-xs">OTS Map Portal</span> -->
+    </div>
+    <!-- Nav -->
+    <ul class="nav navbar-nav calcite-nav">
+      <!-- <li class="active"><a id="mapNav" class="hidden-xs hidden-sm" href="#2dTab" aria-controls="2Dtab"
+          aria-expanded="true" role="tab" data-toggle="tab" data-tooltip="tip" title="2D View"
+          data-placement="bottom">Map</a></li>
+      <li><a id="sceneNav" class="hidden-xs hidden-sm" href="#3dTab" aria-controls="3Dtab"
+          role="tab" data-toggle="tab" data-tooltip="tip" title="3D View" data-placement="bottom">Scene</a></li> -->
+      <li>
+        <div class="calcite-navbar-search calcite-search-expander">
+          <div id="searchWidgetDiv"></div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <!--/.calcite-navbar -->
+
+  <!-- Map  -->
+
+  <div class="calcite-map calcite-map-absolute">
+    <div id="tabContainer" class="tab-content">
+      <div id="2dTab" class="tab-pane fade in active" role="tabpanel">
+        <div id="mapViewDiv"></div>
+      </div>
+      <!-- <div id="3dTab" class="tab-pane fade" role="tabpanel">
+        <div id="sceneViewDiv"></div>
+      </div> -->
+    </div>
+  </div>
+  <!-- /.calcite-map -->
+
+  <!-- Panels -->
+
+  <div class="calcite-panels calcite-panels-right calcite-text-dark calcite-bg-light panel-group">
+
+    
+
+    <!-- Legend Panel -->
+    
+    <div id="panelLegend" class="panel collapse">
+      <div id="headingLegend" class="panel-heading " role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle" role="button" tabindex="0" data-toggle="collapse" href="#collapseLegend" 
+            aria-expanded="true" aria-controls="collapseLegend"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><span class="panel-label">Legends</span></a> 
+          <a class="panel-close" role="button" aria-label="Close" tabindex="0" data-toggle="collapse" href="#panelLegend" aria-controls="panelLegend"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
+        </div>
+      </div>
+      <div id="collapseLegend" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLegend">
+        <div class="panel-body">
+          <div id="legendDiv"></div>
+        </div>
+     </div>
+    </div>
+
+    <!-- /.Legend Panel -->
+
+
+    <!-- Layers Panel -->
+    
+    <div id="panelLayers" class="panel collapse">
+      <div id="headingLayers" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle" role="button" tabindex="0" data-toggle="collapse" href="#collapseLayers"  
+            aria-expanded="true" aria-controls="collapseLayers"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><span class="panel-label">Layers</span></a> 
+          <a class="panel-close" role="button" aria-label="Close" tabindex="0" data-toggle="collapse" href="#panelLayers" aria-controls="panelLayers"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
+        </div>
+      </div>
+      <div id="collapseLayers" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLegend">
+        <div class="panel-body">
+          <div id="layersDiv"></div>
+        </div>
+     </div>
+    </div>
+
+    <!-- /.Layers Panel -->
+
+
+    <!-- Slides Panel -->
+    
+    <div id="panelSlides" class="panel collapse"> 
+      <div id="headingSlides" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" tabindex="0" data-toggle="collapse" href="#bookmarkSlidesNode" 
+            aria-expanded="false"   aria-controls="bookmarkSlidesNode"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span><span class="panel-label">Bookmarks</span></a> 
+          <a class="panel-close" role="button" aria-label="Close" tabindex="0" data-toggle="collapse" href="#panelSlides" aria-controls="panelSlides"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>  
+        </div>
+      </div>
+      <div id="bookmarkSlidesNode" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSlides">
+                
+      </div>
+      <!-- <div id="bookmarkSlidesNode" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSlides">
+        <div class="panel-body">
+          <div id="carouselSlides" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators"></ol>
+            <div class="carousel-inner" role="listbox"></div>
+            <a class="left carousel-control" href="#carouselSlides" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carouselSlides" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+    <!-- /.Slides Panel -->
+
+    <!-- Print Panel -->
+
+    <div id="panelPrint" class="panel collapse">
+      <div id="headingPrint" class="panel-heading">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" tabindex="0" data-toggle="collapse" href="#collapsePrint" 
+            aria-expanded="false" aria-controls="collapsePrint"><span class="glyphicon glyphicon-print" aria-hidden="true"></span><span class="panel-label">Print</span></a> 
+          <a class="panel-close" role="button" aria-label="Close" tabindex="0" data-toggle="collapse" href="#panelPrint" aria-controls="panelPrint"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapsePrint" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrint">
+        <div class="panel-body">
+           <div id="printDiv"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- /.Print Panel -->
+
+
+    <!-- Panel BaseMap Gallery -->
+
+    <div id="panelBasemapGallery" class="panel collapse">
+      <div id="headingBasemapGallery" class="panel-heading">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" tabindex="0" data-toggle="collapse" href="#collapseBasemapGallery" 
+            aria-expanded="false" aria-controls="collapseBasemapGallery"><span class="glyphicon esri-icon-basemap" aria-hidden="true"></span><span class="panel-label">Base Map Gallery</span></a> 
+          <a class="panel-close" role="button" aria-label="Close" tabindex="0" data-toggle="collapse" href="#panelBasemapGallery" aria-controls="panelBasemapGallery"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseBasemapGallery" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemapGallery">
+        <div class="panel-body">
+           <div id="basemapGalleryDiv"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- /.Panel BaseMap Gallery -->
+
+    <!-- Measurement Panel -->
+
+    <div id="panelMeasurement" class="panel collapse">
+      <div id="headingMeasurement" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseMeasurement"
+            aria-expanded="false" aria-controls="collapseMeasurement"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="panel-label">Measurement</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelMeasurement"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseMeasurement" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMeasurement">
+        <div class="panel-body">
+          <div id="MeasurementDiv" class="widget-panebody-inner">
+            <div id="toolbarMeasurement">
+              <button class="action-button" id="pointButtonMeasurement" type="button"
+                title="Measure point"> <img src="assets/images/Measure_Point16.png" /> </button>
+              <button class="action-button " id="polylineButtonMeasurement" type="button"
+                title="Measure polyline"><img src="assets/images/Measure_Distance16.png" /></button>
+              <button class="action-button" id="polygonButtonMeasurement" type="button"
+                title="Measure polygon"><img src="assets/images/Measure_Area16.png" /></button>
+              <button class="action-button " id="resetBtnMeasurement" type="button" 
+                title="Clear graphics"> <img src="assets/images/close.gif" /> </button>
+            </div>
+            <div class="widget-panelbody-inner-seperator"></div>
+            <div>
+              <span class="widget-panelbody-inner-selector" id="measurementAreaSelector" style="display: none">
+                <select class="form-control" id="measurementAreaUnitSelect">
+                  <option value="Acres" selected="">Acres</option>
+                  <option value="Sq Miles">Sq Miles</option>
+                  <option value="Sq Kilometers">Sq Kilometers</option>
+                  <option value="Hectares">Hectares</option>
+                  <option value="Sq Yards">Sq Yards</option>
+                  <option value="Sq Feet">Sq Feet</option>
+                  <!-- <option value="Sq Feet (US)">Sq Feet (US)</option> -->
+                  <option value="Sq Meters">Sq Meters</option>
+                </select>
+              </span>
+              <span class="widget-panelbody-inner-selector" id="measurementLineSelector" style="display: none">
+                <select class="form-control" id="measurementLineUnitSelect">
+                  <option value="Miles" selected="">Miles</option>
+                  <option value="Kilometers">Kilometers</option>
+                  <option value="Feet">Feet</option>
+                  <!-- <option value="Feet (US)">Feet (US)</option> -->
+                  <option value="Meters">Meters</option>
+                  <option value="Yards">Yards</option>
+                  <option value="Nautical Miles">Nautical Miles</option>
+                </select>
+              </span>
+              <span class="widget-panelbody-inner-selector" id="measurementPointSelector" style="display: none">
+                <select class="form-control" id="measurementPointUnitSelect">
+                  <option value="Degrees" selected="">Degrees</option>
+                  <option value="DMS">DMS</option>
+                </select>
+              </span>
+            </div>
+            <div class="widget-panelbody-inner-seperator widget-panelbody-inner-measurementResultLabel">Measurement Result</div>
+            <div class="widget-panelbody-inner-seperator" id="measurementResultDisplayerLineArea" style="display: block"> </div>
+            <div class="widget-panelbody-inner-seperator table-responsive" id="measurementResultDisplayerPoint" style="display: none"> 
+                <div class="table-responsive" >
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Latitude</td>
+                        <td>Longitude</td>
+                      </tr>
+                      <tr>
+                        <td id="measurementResultDisplayerPoint_Lati"></td>
+                        <td id="measurementResultDisplayerPoint_Longi"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <!-- /.Measurement Panel -->
+
+
+    <!-- Draw Panel -->
+
+    <div id="panelDraw" class="panel collapse">
+      <div id="headingDraw" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseDraw"
+            aria-expanded="false" aria-controls="collapseDraw"><span class="glyphicon esri-icon-polygon" aria-hidden="true"></span><span class="panel-label">Draw</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelDraw"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseDraw" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDraw">
+        <div class="panel-body">
+          <div id="DrawDiv" class="widget-panebody-inner">
+            <div id="toolbarDraw">
+              <button class="action-button esri-icon-blank-map-pin" id="pointButton" type="button"
+                title="Draw point"></button>
+              <button class="action-button esri-icon-handle-horizontal" id="multipointButton" type="button"
+                title="Draw multipoint"></button>
+              <button class="action-button esri-icon-polyline" id="polylineButton" type="button"
+                title="Draw polyline"></button>
+              <button class="action-button esri-icon-polygon" id="polygonButton" type="button"
+                title="Draw polygon"></button>
+              <button class="action-button esri-icon-trash" id="resetBtn" type="button" title="Clear graphics"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <!-- /.Draw Panel -->
+
+    
+  </div>
+  <!-- /.calcite-panels -->
+
+  <!-- <script type="text/javascript">
+    var dojoConfig = {
+      packages: [{
+        name: "bootstrap",
+        location: "https://esri.github.io/calcite-maps/dist/vendor/dojo-bootstrap"
+      },
+      {
+        name: "calcite-maps",
+        location: "https://esri.github.io/calcite-maps/dist/js/dojo"
+      },
+      {
+        name: "application",
+        location: "/js/application"
+      }]
+    };
+  </script> -->
+
+<!-- This is the DOJO's dojoconfig.js file. This is the primary mechanism for configuring Dojo in a web page or application. 
+    It is referenced by the module loader, as well as Dojo components with global options. It can further be used as a 
+    configuration point for custom applications, if desired.  -->
+  <script type="text/javascript" src="js/dojoConfig.js"></script> 
+
+  <!-- ArcGIS JS 4.6 -->
+  <script src="https://js.arcgis.com/4.6/"></script>
+
+ 
+
+  <!-- <script src="js/application/main.js"> </script> -->
+
+  <script type="text/javascript">
+    require([
+      "application",
+      "jquery",
+      "knockout"
+    ], function (
+      appMain,
+      $,
+      ko
+    ) {
+      // create my main application. Start placing your logic in the main.js file.
+      var app = new appMain("mapViewDiv");
+      app.init();
+
+      // wait until whole DOM is loaded
+      /*$(document).ready(function()
+      { 
+            function AppViewModel() {
+                this.kocAppMainName = ko.observable("IMP (SEK) Map Portal");
+                this.kocAppSubName = ko.observable("Kuwait Oil Company");
+            }
+
+            // Activates knockout.js ViewModel
+            ko.applyBindings(new AppViewModel());
+      }); */
+   });
+
+  </script>
+
+</body>
+</html>

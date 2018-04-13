@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FA39BF90-C0F1-4250-98A0-71F72082C10E}</ProjectGuid>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GISWebViewer</RootNamespace>
+    <AssemblyName>GISWebViewer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\knockout-3.4.2.js" />
+    <Content Include="Scripts\knockout-3.4.2.debug.js" />
+    <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1-vsdoc.js" />
+    <Content Include="assets\images\Draw.png" />
+    <Content Include="assets\images\Icon_Measure_Area_16.png" />
+    <Content Include="assets\images\Icon_Measure_Distance_16.png" />
+    <Content Include="assets\images\Icon_Measure_Point_16.png" />
+    <Content Include="assets\images\Measure_Area16.png" />
+    <Content Include="assets\images\Measure_Distance16.png" />
+    <Content Include="assets\images\Measure_Point16.png" />
+    <Content Include="assets\images\close.gif" />
+    <Content Include="assets\images\esripoint.png" />
+    <Content Include="assets\images\koclogo.png" />
+    <Content Include="assets\images\loading.gif" />
+    <Content Include="assets\images\measurement.png" />
+    <Content Include="css\boilerplat.css" />
+    <Content Include="css\main.css" />
+    <Content Include="js\dojoConfig.js" />
+    <Content Include="js\application\main.js" />
+    <Content Include="js\application\view\ViewManager.js" />
+    <Content Include="js\application\widgets\Bookmark\BookmarkWidget.js" />
+    <Content Include="js\application\widgets\DrawWidget.js" />
+    <Content Include="js\application\widgets\MeasurementWidget.js" />
+    <Content Include="index.html" />
+    <Content Include="js\configs\appConfig.js" />
+    <Content Include="js\configs\mapConfig.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\" />
+    <Folder Include="assets\images\" />
+    <Folder Include="js\configs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <None Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+</Project>
