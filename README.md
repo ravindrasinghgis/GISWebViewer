@@ -2,18 +2,18 @@
 
 
 # Following Widgets have been implemented.
-1> Zoom-In
-2> Zoom-Out
-3> North Arrow
-4> Home
-5> GPS
-6> Scalebar
-7> Toggle Basemap
-8> TOC (Layers)
-9> Legends
-10> Bookmarks
-11> Print
-12> Basemap Gallery
-13> Measurement
-14> Draw
-15> FullMap
+1. Zoom-In
+1. Zoom-Out
+1. North Arrow
+1. Home
+1. GPS
+1. Scalebar
+1. Toggle Basemap
+1. TOC (Layers)
+1. Legends
+1. Bookmarks
+1. Print
+1. Basemap Gallery
+1. Measurement
+1. Draw
+1. FullMap
